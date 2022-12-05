@@ -1,0 +1,60 @@
+services:
+  psql:
+    image: postgis/postgis:14-master
+    deploy:
+      resources:
+        limits:
+          cpus: ".25"
+          memory: 4096M
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER_NAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+  mysql-db:
+    image: mysql:8.0.28-debian
+    deploy:
+      resources:
+        limits:
+          cpus: ".25"
+          memory: 4096M
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${DB_USER_NAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+  mongodb:
+    image: mongo:5.0.14-focal
+    deploy:
+      resources:
+        limits:
+          cpus: ".25"
+          memory: 4096M
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER_NAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+      DB_USERNAME: ${DB_USER_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/var/lib/mongodb/data
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+volumes:
+  pgdata:
+  mysqldata:
+  mongodata:

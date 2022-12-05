@@ -1,0 +1,27 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Insertion speed of indexed spatial data: comparing
+  MySQL, PostgreSQL and MongoDB
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Lars-Olav
+    family-names: Vågene
+    email: larsolov@stud.ntnu.no
+  - given-names: Eirik
+    family-names: Schøien
+    email: eirischo@stud.ntnu.no
+  - given-names: Christian
+    family-names: Axell
+    email: cdaxell@stud.ntnu.no
+  - given-names: Ingvild
+    family-names: Løver Thon
+    email: ingvlt@stud.ntnu.no
+  - given-names: Lukas
+    family-names: Tveiten
+    email: lukasnt@stud.ntnu.no
