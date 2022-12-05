@@ -2,8 +2,8 @@
 
 
 ITER="1"
-SIZE="100000 500000 1000000"
-PRELOAD="0 1000000"
+SIZE="1000000"
+PRELOAD="1000000"
 python3 cli.py prepare
 for i in $SIZE
 do

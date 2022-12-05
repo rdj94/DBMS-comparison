@@ -61,6 +61,10 @@ def pg_parse(data: list):
     """
     pg_data = []
     for user, lat, lon, alt, date, time in data:
+        if lon <-180 or lon > 180:
+            continue
+        if lat < -90 or lat > 90:
+            continue
         # Note order swapping: (lat, lon) => (lon, lat)
         pg_data.append([user, lon, lat, alt, date, time])
     return pg_data
@@ -73,6 +77,10 @@ def mysql_parse(data: list):
     """
     my_data = []
     for user, lat, lon, alt, date, time in data:
+        if lon <-180 or lon > 180:
+            continue
+        if lat < -90 or lat > 90:
+            continue
         my_data.append([user, lon, lat, alt, date, time])
     return my_data
 
