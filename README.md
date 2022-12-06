@@ -38,7 +38,7 @@ with Python or a GUI tool like DB Browser.
 
 ## Reference
 
-- [Insertion speed of indexed spatial data](https://github.com/LarsV123/it3010)
-- [Geolife dataset](https://www.microsoft.com/en-us/research/publication/geolife-gps-trajectory-dataset-user-guide/)
 - [Insertion speed of indexed spatial data](https://folk.idi.ntnu.no/baf/eremcis/2022/Group02.pdf)
+- [Reference repo](https://github.com/LarsV123/it3010)
+- [Geolife dataset](https://www.microsoft.com/en-us/research/publication/geolife-gps-trajectory-dataset-user-guide/)
 - [Comparison of Processing PostGIS AND MongoDB](https://edisciplinas.usp.br/pluginfile.php/5530294/mod_resource/content/1/BDAS19_DBAPML_online.pdf)
