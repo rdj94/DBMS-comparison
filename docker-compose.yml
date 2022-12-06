@@ -50,10 +50,6 @@ services:
       - 27017:27017
     volumes:
       - mongodata:/var/lib/mongodb/data
-  adminer:
-    image: adminer:latest
-    ports:
-      - 8080:8080
 volumes:
   pgdata:
   mysqldata:

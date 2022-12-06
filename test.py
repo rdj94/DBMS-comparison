@@ -96,7 +96,7 @@ def insert_test():
     my_data = mysql_parse(raw_data)
     mongo_data = mongo_parse(raw_data)
 
-    for dbms in ['mongodb','postgres','mysql']:
+    for dbms in ['mysql','postgres','mongodb']:
         conn = get_dbms(dbms)    
         for index in [True,False]:
             for datasize in [100000,500000,1000000,5000000,10000000]:
@@ -141,34 +141,36 @@ def spatial_query_my(db,table_name,distance):
     db.cursor.fetchall()
 
 
-def spatial_query_mongodb(conn,table_name,distance):
-    
-    conn.db[table_name].find({
-        'tp_point' : { 
-            '$geoWithin' :{ 
-                '$geometry' : {    
-                    'type': "Polygon",
-                    'coordinates': [ 
-                        [[115.78872493099823, 40.25147437935814],
-                        [115.78872493099823, 39.504373413215234],
-                        [117.10462122600086, 39.504373413215234],
-                        [117.10462122600086, 40.25147437935814],
-                        [115.78872493099823,40.25147437935814]
-                    ]]
+def spatial_query_mongodb(conn,table_name,distance,point=None):
+    try:
+        conn.db[table_name].find({
+            'tp_point' : { 
+                '$geoWithin' :{ 
+                    '$geometry' : {    
+                        'type': "Polygon",
+                        'coordinates': [ 
+                            [[115.78872493099823, 40.25147437935814],
+                            [115.78872493099823, 39.504373413215234],
+                            [117.10462122600086, 39.504373413215234],
+                            [117.10462122600086, 40.25147437935814],
+                            [115.78872493099823,40.25147437935814]
+                        ]]
+                    } 
                 } 
             } 
-        } 
-    })
+        })
 
 
-    conn.db[table_name].find({
-    'tp_point' : { 
-        '$nearSphere' :{ 
-            '$geometry' : {
-                'type': "point",
-                'coordinates': [116.69003229411601 ,39.38337235593969]
-            } , '$maxDistance' : 10000} 
-        }})
+        conn.db[table_name].find({
+        'tp_point' : { 
+            '$nearSphere' :{ 
+                '$geometry' : {
+                    'type': "point",
+                    'coordinates': [116.69003229411601 ,39.38337235593969]
+                } , '$maxDistance' : distance} 
+            }}).explain()
+    except:
+        return
     
 def spatial_query_pg(db,table_name,distance):
     centroid_sql = f"""
@@ -196,10 +198,10 @@ def spatial_query_test():
     for dbms in ['postgres','mysql','mongodb']:
         conn = get_dbms(dbms)    
         for index in [True,False]:
-            for datasize in [100000,500000,1000000,5000000,10000000]:
+            for datasize in [100000,500000,1000000,5000000,100000000]:
                 table_name = f"st_trackpoint_{int(datasize / 1000)}k"
                 table_name += '_indexed' if index else '_no_index'
-                for d in [1000,10000,100000]:
+                for d in [100000,200000,500000,1000000]:
                     if dbms == 'postgres':
                         start = perf_counter()  
                         spatial_query_pg(conn,table_name,d)

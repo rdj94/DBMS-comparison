@@ -87,7 +87,7 @@ def insert_trans(db: Connector, table: str, data: list, batch_size: int, experim
     
     for i in tqdm(range(0, experiment_size, batch_size), leave=False):
         db.cursor.executemany(query, data[i : i + batch_size])
-        db.connection.commit()
+    db.connection.commit()
         
 def insert(db: Connector, table: str, data: list, experiment_size: int):
     """
