@@ -1,4 +1,4 @@
-# mongodb-vs-mysql-vs-postgresql
+# mongodb mysql postgresql comparison
 This is the storage that you implemented to experiment with embedded update deletion DML Query and Spatial Query for Geolife Dataset by mysql,postgresql,mongodb.
 
 For implementation, I implemented update, delete, and spatial query excluding the insert part in the code in the repository of those who referred.
